@@ -19,6 +19,7 @@ test('filnamify()', t => {
 	t.is(filenamify('con', {replacement: '🐴🐴'}), 'con🐴🐴');
 	t.is(filenamify('c/n', {replacement: 'o'}), 'cono');
 	t.is(filenamify('c/n', {replacement: 'con'}), 'cconn');
+	t.is(filenamify('my <file name-', {replacement: '-'}), 'my -file name-');
 });
 
 test('filenamify.path()', t => {

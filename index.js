@@ -15,6 +15,7 @@ const filenamify = (string, options = {}) => {
 		throw new TypeError('Expected a string');
 	}
 
+	const original = string;
 	const replacement = options.replacement === undefined ? '!' : options.replacement;
 
 	if (filenameReservedRegex().test(replacement) && reControlChars.test(replacement)) {
@@ -27,7 +28,7 @@ const filenamify = (string, options = {}) => {
 
 	if (replacement.length > 0) {
 		string = trimRepeated(string, replacement);
-		string = string.length > 1 ? stripOuter(string, replacement) : string;
+		string = string.length > 1 && original.slice(-1) !== replacement ? stripOuter(string, replacement) : string;
 	}
 
 	string = filenameReservedRegex.windowsNames().test(string) ? string + replacement : string;
